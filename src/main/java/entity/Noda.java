@@ -1,16 +1,16 @@
-package service;
+package entity;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Noda {
-	
+
 	private Lock lock = new ReentrantLock();
-	
+
 	private int value;
-	
+
 	private boolean access = true;
-	
+
 	public Noda() {
 		super();
 	}
@@ -26,24 +26,28 @@ public class Noda {
 			return value;
 		} finally {
 			lock.unlock();
-		}				
+		}
 	}
 
 	public boolean setValue(int value) {
+
+		if (!lock.tryLock()) {
+			return false;
+		}
+
 		try {
-			lock.lock();
 			if (!access) {
 				return false;
 			}
-			
+
 			this.value = value;
 			access = false;
 			return true;
 		} finally {
 			lock.unlock();
-		}		
+		}
 	}
-	
+
 	public boolean isAccess() {
 		return access;
 	}
@@ -78,5 +82,5 @@ public class Noda {
 	public String toString() {
 		return "Noda [value=" + value + "]";
 	}
-	
+
 }

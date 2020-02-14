@@ -1,14 +1,20 @@
-package service;
+package entity;
+
+import util.ProjectConstant;
 
 public enum MatrixHolder {
-	MATRIX(5);
+	MATRIX;
 	
 	private Noda[][] matrix;
-	private MatrixHolder(int n) {
-		matrix = new Noda[n][n];
-		
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
+	{
+		int size = ProjectConstant.DEFAULT_MATRIX_SIZE;
+		setMatrixSize(size);
+	}
+	
+	public void setMatrixSize(int size) {
+		matrix = new Noda[size][size];
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
 				matrix[i][j] = new Noda();
 			}
 		}

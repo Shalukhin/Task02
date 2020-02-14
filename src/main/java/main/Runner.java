@@ -2,8 +2,8 @@ package main;
 
 import java.util.ArrayList;
 
+import entity.MatrixHolder;
 import service.MatrixChangerThread;
-import service.MatrixHolder;
 
 public class Runner {
 	
