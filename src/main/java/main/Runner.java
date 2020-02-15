@@ -34,7 +34,7 @@ public class Runner {
 			} catch (InterruptedException e) {
 				LOGGER.error("Error_with_semaphore");
 			}
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < matrixInit[0]; i++) {
 				Thread thread = new MatrixChangerThread(i + 1 + 5 * m, barrierAfterChange, barrierAfterSummation); 				
 				thread.start();
 			}			
