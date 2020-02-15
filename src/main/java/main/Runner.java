@@ -8,19 +8,34 @@ import entity.MatrixHolder;
 import service.MatrixChangerThread;
 import service.MatrixRefresherAccessToNodes;
 import service.MatrixSaverThread;
+import util.ParserText;
 import util.ProjectConstant;
+import util.ReaderFromFile;
 
 public class Runner {
 	
 	private static final Logger LOGGER = LogManager.getLogger(Runner.class.getName());
 	
+	
 	public static void main(String[] args) {
+		
+		ReaderFromFile reader = new ReaderFromFile();
+		
+		int[] matrixInit = {ProjectConstant.DEFAULT_MATRIX_SIZE, ProjectConstant.DEFAULT_COUNT_THREAD_GROUP};
+//		try {
+//			matrixInit = ParserText.extractIntFromText(reader.read(ProjectConstant.NAME_INIT_FILE));
+//		} catch (Exception e) {
+//			LOGGER.error("Error_init_matrix");			
+//		} 
+		MatrixHolder matrix = MatrixHolder.MATRIX;
+		matrix.setMatrixSize(matrixInit[0]);
+		
 		Semaphore semaphoreAfterSaveMatrix = new Semaphore(1);
 		Semaphore semaphoreAfterRefreshMatrix = new Semaphore(1);
 		CyclicBarrier barrierAfterChange = new CyclicBarrier(5, new MatrixSaverThread(semaphoreAfterSaveMatrix));
 		CyclicBarrier barrierAfterSummation = new CyclicBarrier(5,  new MatrixRefresherAccessToNodes(semaphoreAfterRefreshMatrix));	
 		
-		for (int m = 0; m < 3; m++) {
+		for (int m = 0; m < matrixInit[1]; m++) {
 			try {
 				semaphoreAfterSaveMatrix.acquire();				
 				semaphoreAfterRefreshMatrix.acquire();
