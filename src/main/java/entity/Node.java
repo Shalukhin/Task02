@@ -3,19 +3,17 @@ package entity;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Noda {
+public class Node {
 
 	private Lock lock = new ReentrantLock();
-
 	private int value;
-
 	private boolean access = true;
 
-	public Noda() {
+	public Node() {
 		super();
 	}
 
-	public Noda(int value) {
+	public Node(int value) {
 		super();
 		this.value = value;
 	}
@@ -72,7 +70,7 @@ public class Noda {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Noda other = (Noda) obj;
+		Node other = (Node) obj;
 		if (value != other.value)
 			return false;
 		return true;
@@ -80,7 +78,6 @@ public class Noda {
 
 	@Override
 	public String toString() {
-		return "Noda [value=" + value + "]";
+		return "Node [value=" + value + "]";
 	}
-
 }

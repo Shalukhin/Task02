@@ -6,7 +6,7 @@ import dao.impl.FileMatrixDAO;
 public class DAOFactory {
 	
 	private static DAOFactory instance;
-	private MatrixDAO matrixDAO = new FileMatrixDAO();
+	private MatrixDAO matrixDAO = FileMatrixDAO.getInstance();
 	
 	private DAOFactory() {};	
 	public static DAOFactory getInstance() {
