@@ -7,6 +7,8 @@ public interface MatrixDAO {
 	
 	boolean writeMatrixState(MatrixHolder matrix) throws DAOException;
 	
-	boolean writeSumInfo(String threadName, int sum) throws DAOException;	
+	boolean writeSumInfo(String threadName, int sum) throws DAOException;
+	
+	boolean writeEndLine() throws DAOException;
 
 }

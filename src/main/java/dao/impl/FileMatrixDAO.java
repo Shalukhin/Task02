@@ -35,9 +35,14 @@ public class FileMatrixDAO implements MatrixDAO {
 	
 	@Override
 	public boolean writeSumInfo(String threadName, int sum) throws DAOException {
-		String sumTextView = String.format("Thread \"%s\": sum = %3d", threadName, sum);
+		String sumTextView = String.format("Thread \"%2s\": sum = %3d", threadName, sum);
 		return write(sumTextView, "Error_writing_sum_to_file");		
 	}
+	
+	@Override
+	public boolean writeEndLine() throws DAOException {		
+		return write(ProjectConstant.END_LINE, "Error_write_end_line");
+	}	
 	
 	private String makeTextWiewFromMatrix(MatrixHolder matrix) {
 		String result;
@@ -66,5 +71,6 @@ public class FileMatrixDAO implements MatrixDAO {
 		} finally {
 			semaphore.release();
 		}		
-	}	
+	}
+	
 }

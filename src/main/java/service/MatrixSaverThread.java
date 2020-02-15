@@ -24,6 +24,7 @@ public class MatrixSaverThread implements Runnable {												//  данный
 	@Override
 	public void run() {		
 		try {
+			matrixDAO.writeEndLine();
 			matrixDAO.writeMatrixState(matrix);
 		} catch (DAOException e) {
 			LOGGER.error("Error_in_matrix_saver_thread");			

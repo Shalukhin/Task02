@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import dao.MatrixDAO;
 import entity.MatrixHolder;
 import exception.DAOException;
+import exception.InvalidValueException;
 import factory.DAOFactory;
 
 public class MatrixChangerThread extends Thread {
@@ -23,12 +24,12 @@ public class MatrixChangerThread extends Thread {
 	private CyclicBarrier barrierAfterChange;
 	private CyclicBarrier barrierAfterSummation;
 
-	public MatrixChangerThread(int name) {		
+	public MatrixChangerThread(int name, CyclicBarrier barrierAfterChange, CyclicBarrier barrierAfterSummation) throws InvalidValueException {
 		super(String.valueOf(name));
-	}	
-
-	public MatrixChangerThread(int name, CyclicBarrier barrierAfterChange, CyclicBarrier barrierAfterSummation) {
-		this(name);
+		if (barrierAfterChange == null || barrierAfterSummation == null) {
+			LOGGER.error("Error_invalid_value_barriers");
+			throw new InvalidValueException("Error_invalid_value_barriers");
+		}		
 		this.barrierAfterChange = barrierAfterChange;
 		this.barrierAfterSummation = barrierAfterSummation;
 	}

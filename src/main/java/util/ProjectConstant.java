@@ -9,5 +9,7 @@ public class ProjectConstant {
 	public final static int DEFAULT_MATRIX_SIZE = 5;
 	
 	public final static int DEFAULT_COUNT_THREAD_GROUP = 3;
+	
+	public final static String END_LINE = "\n---------------------------------------------------------------------\n";
 
 }
